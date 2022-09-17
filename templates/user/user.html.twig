@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+{% do gantry.document.addFramework('mootools.core') %}
+{% do gantry.document.addFramework('mootools.more') %}
+
+{#{% block css %}<link href="../../templates/assets/styles.css" type="text/css" rel="stylesheet">{% endblock %}#}
+
+
+{% block titre %} Ajouter un etudiant {% endblock %}
+
+{% block content %}
+        <style>
+                h1{
+                        text-align: center;
+                        margin-bottom: 75px;
+                }
+                h2{
+                        text-align: center;
+                }
+                form{
+                        margin-bottom: 20px;
+                }
+                .container{
+                        width:80%;
+                }
+        </style>
+        <h1>Ajouter un étudiant</h1>
+        {#    <form class="ajoutUser" method="post" action="/addUser">#}
+        <div class="container">
+        <form action="/addUser" method="post">
+                <!-- 2 column grid layout with text inputs for the first and last names -->
+                <div class="row mb-4">
+                        <div class="col">
+                                <div class="form-outline">
+                                        <input type="text" id="form3Example1" class="form-control" name="firstname" />
+                                        <label class="form-label" for="form3Example1">First Name</label>
+                                </div>
+                                <div class="form-outline">
+                                        <input type="text" id="form3Example1" class="form-control" name="login" required/>
+                                        <label class="form-label" for="form3Example1">Login</label>
+                                </div>
+                        </div>
+                        <div class="col">
+                                <div class="form-outline">
+                                        <input type="text" id="form3Example2" class="form-control" name="lastname" required/>
+                                        <label class="form-label" for="form3Example2">Last name</label>
+                                </div>
+
+                        </div>
+                </div>
+
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                        <input type="email" id="form3Example3" class="form-control" name="email" required/>
+                        <label class="form-label" for="form3Example3">Email address</label>
+                </div>
+
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                        <input type="password" id="form3Example4" class="form-control"  name="password"/>
+                        <label class="form-label" for="form3Example4">Password</label>
+                </div>
+
+                <!-- Checkbox -->
+
+                <!-- Submit button -->
+
+
+                <!-- Register buttons -->
+                <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-block mb-4">Ajouter</button>
+                </div>
+        </form>
+                {% if error == true %}
+                        <h2> {{causeError}}</h2>
+                {% endif %}
+                {% if success == true %}
+                        <h2>Etudiant ajouté !</h2>
+                {% endif %}
+        </div>
+
+
+
+{% endblock %}
