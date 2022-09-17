@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `etudiants` (
   `idEtudiant` int(11) NOT NULL,
   `login` varchar(15) NOT NULL,
-  `motDePasse` varchar(100) NOT NULL,
+  `motDePasse` varchar(100) NOT NULL, -- Modification de mot de passe en varchar(100)
   `nom` varchar(50) NOT NULL,
   `prenom` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL
