@@ -5,7 +5,7 @@ namespace Quizz;
 use Couchbase\User;
 use mysql_xdevapi\Exception;
 use PharIo\Manifest\ElementCollectionException;
-use Quizz\Model\UserModel;
+use Quizz\Model\EtudiantModel;
 
 class FormControl // Création d'une classe qui vérifie le form
 {
@@ -32,7 +32,7 @@ class FormControl // Création d'une classe qui vérifie le form
 
     public static function controlCheck($identifiants) // fonction statique qui prend en parametre les identifiants de connexion
     {
-        $alreadyExist = new UserModel();
+        $alreadyExist = new EtudiantModel();
 
         try { // On va faire des vérifications de champ avec le try catch
             foreach ($identifiants as &$item) {
@@ -54,6 +54,26 @@ class FormControl // Création d'une classe qui vérifie le form
         }
     }
 
+    public static function updateControlCheck($identifiants) // fonction statique qui prend en parametre les identifiants de connexion
+    {
+        $alreadyExist = new EtudiantModel();
+
+        try { // On va faire des vérifications de champ avec le try catch
+            foreach ($identifiants as &$item) {
+                if ($item == null) throw new \Exception('Pas tous les champs ont été rempli', code: 0); // check si tous les identifiants ont été rempli
+            }
+            if (strlen($_POST['login']) <= 2) { // vérifie si la taille de la string 'login' est < 2
+                throw new \Exception('Login trop court', code: 1);
+            } elseif (strlen($_POST['login']) >= 15) { // vérifie si la taille de la string 'login' est > 15
+                throw new \Exception('Login trop long', code: 2);
+            } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {// vérifie si le champ 'email' est dans la bonne forme
+                throw new \Exception("L'email n'est pas de la bonne forme", code: 3);
+            }
+        } catch (\Exception $e) {
+            return $e->getMessage(); // si une Exception est raise , on return le message !
+        }
+    }
+
     public static function securityCheck($password){ // fonction statique qui sécurise le mdp
         $uppercase = preg_match('@[A-Z]@', $password); // renvoie un booléen s'il existe une majuscule
         $lowercase = preg_match('@[a-z]@', $password);// renvoie un booléen s'il existe une minuscule
@@ -68,6 +88,7 @@ class FormControl // Création d'une classe qui vérifie le form
         }catch (\Exception $e){
             return $e; // si il y a une exception , la renvoyer
         }
+
 
         //CHIFFREMENT DU MOT DE PASSE
         $encrypted_passsword = password_hash($password,PASSWORD_DEFAULT,['cost' => 10]); // cryptage du mot de passe avec un cout de 10

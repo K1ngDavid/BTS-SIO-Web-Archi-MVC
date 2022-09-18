@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}Etudiant{% endblock %}
+
+{% block content %}
+
+    <style>
+        h1{
+            text-align: center;
+            margin-top: 50px;
+        }
+        h2{
+             text-align: center;
+         }
+        form{
+            margin-top: 70px;
+        }
+        .container{
+            width:80%;
+        }
+    </style>
+
+
+    <h1> Etudiant : {{ etudiant.getLogin }}</h1>
+    <div class="container">
+    <form method="post" action="/etudiants/{{ etudiant.getIdEtudiant }}">
+        <div class="row mb-4">
+            <div class="col">
+                <div class="form-outline">
+                    <input type="text" id="form3Example1" class="form-control" name="firstname" placeholder="{{ etudiant.getPrenom }}" />
+                    <label class="form-label" for="form3Example1">First Name</label>
+                </div>
+                <div class="form-outline">
+                    <input type="text" id="form3Example1" class="form-control" name="login" placeholder="{{ etudiant.getLogin }}" required/>
+                    <label class="form-label" for="form3Example1">Login</label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline">
+                    <input type="text" id="form3Example2" class="form-control" name="lastname" placeholder="{{ etudiant.getNom }}" required/>
+                    <label class="form-label" for="form3Example2">Last name</label>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+            <input type="email" id="form3Example3" class="form-control" name="email" placeholder="{{ etudiant.getEmail }}" required/>
+            <label class="form-label" for="form3Example3">Email address</label>
+        </div>
+
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+            <input type="password" id="form3Example4" class="form-control"  name="password"/>
+            <label class="form-label" for="form3Example4">Password</label>
+        </div>
+
+
+        <!-- Submit button -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-block mb-4">Modifier</button>
+        </div>
+    </form>
+        {% if error == true %}
+            <h2> {{causeError}}</h2>
+        {% endif %}
+        {% if success == true %}
+            <h2>Etudiant modifié !</h2>
+        {% endif %}
+    </div>
+
+
+
+{% endblock %}

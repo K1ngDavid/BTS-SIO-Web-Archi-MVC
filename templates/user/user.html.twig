@@ -25,12 +25,12 @@
         <h1>Ajouter un étudiant</h1>
         {#    <form class="ajoutUser" method="post" action="/addUser">#}
         <div class="container">
-        <form action="/addUser" method="post">
+        <form action="/etudiants/add" method="post">
                 <!-- 2 column grid layout with text inputs for the first and last names -->
                 <div class="row mb-4">
                         <div class="col">
                                 <div class="form-outline">
-                                        <input type="text" id="form3Example1" class="form-control" name="firstname" />
+                                        <input type="text" id="form3Example1" class="form-control" name="firstname" required/>
                                         <label class="form-label" for="form3Example1">First Name</label>
                                 </div>
                                 <div class="form-outline">
@@ -55,7 +55,7 @@
 
                 <!-- Password input -->
                 <div class="form-outline mb-4">
-                        <input type="password" id="form3Example4" class="form-control"  name="password"/>
+                        <input type="password" id="form3Example4" class="form-control"  name="password" required/>
                         <label class="form-label" for="form3Example4">Password</label>
                 </div>
 

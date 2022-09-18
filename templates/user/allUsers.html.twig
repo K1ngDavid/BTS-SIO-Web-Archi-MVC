@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}Etudiants{% endblock %}
+
+{% block content %}
+    <style>
+        button{
+            background: orangered;
+            border-radius: 5px;
+        }
+        h2{
+            position : relative;
+            text-align: center;
+        }
+    </style>
+    <table class="table">
+    <thead>
+    <tr>
+        <th scope="col"></th>
+        <th scope="col">Id</th>
+        <th scope="col">Login</th>
+        <th scope="col">Password</th>
+        <th scope="col">FirstName</th>
+        <th scope="col">LastName</th>
+        <th scope="col">Email</th>
+    </tr>
+    </thead>
+    {% for etudiant in etudiants %}
+        <tr>
+            <form method="post" action="/etudiants/{{ etudiant.getIdEtudiant }}/del">
+            <th scope="row"><button type="submit">Supprimer</button></th></form>
+            <th scope="row">{{ etudiant.getIdEtudiant }}</th>
+            <th scope="row"><a href="/etudiants/{{ etudiant.getIdEtudiant }}"> {{ etudiant.getLogin }}</a></th>
+            <th scope="row">{{ etudiant.getMotDePasse }}</th>
+            <th scope="row">{{ etudiant.getPrenom }}</th>
+            <th scope="row">{{ etudiant.getNom }}</th>
+            <th scope="row">{{ etudiant.getEmail }}</th>
+        </tr>
+    {% endfor %}
+
+    {% if delete %}
+        <div class="container">
+            <h2>Etudiant supprimé !</h2>
+        </div>
+    {% endif %}
+
+{% endblock %}
