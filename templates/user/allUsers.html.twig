@@ -13,25 +13,23 @@
             text-align: center;
         }
     </style>
-    <table class="table">
-    <thead>
+    <table class="table rounded-3">
+    <thead class="table-dark rounded-2">
     <tr>
-        <th scope="col"></th>
+        <th scope="col" class="rounded-start"></th>
         <th scope="col">Id</th>
         <th scope="col">Login</th>
-        <th scope="col">Password</th>
         <th scope="col">FirstName</th>
         <th scope="col">LastName</th>
-        <th scope="col">Email</th>
+        <th scope="col" class="rounded-end">Email</th>
     </tr>
     </thead>
     {% for etudiant in etudiants %}
-        <tr>
+        <tr bgcolor="#fff0f5" class="rounded-2">
             <form method="post" action="/etudiants/{{ etudiant.getIdEtudiant }}/del">
             <th scope="row"><button type="submit">Supprimer</button></th></form>
             <th scope="row">{{ etudiant.getIdEtudiant }}</th>
             <th scope="row"><a href="/etudiants/{{ etudiant.getIdEtudiant }}"> {{ etudiant.getLogin }}</a></th>
-            <th scope="row">{{ etudiant.getMotDePasse }}</th>
             <th scope="row">{{ etudiant.getPrenom }}</th>
             <th scope="row">{{ etudiant.getNom }}</th>
             <th scope="row">{{ etudiant.getEmail }}</th>

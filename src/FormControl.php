@@ -54,7 +54,7 @@ class FormControl // Création d'une classe qui vérifie le form
         }
     }
 
-    public static function updateControlCheck($identifiants) // fonction statique qui prend en parametre les identifiants de connexion
+    public static function updateControlCheck($identifiants,$login,$email) // fonction statique qui prend en parametre les identifiants de connexion
     {
         $alreadyExist = new EtudiantModel();
 
@@ -69,6 +69,17 @@ class FormControl // Création d'une classe qui vérifie le form
             } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {// vérifie si le champ 'email' est dans la bonne forme
                 throw new \Exception("L'email n'est pas de la bonne forme", code: 3);
             }
+            elseif($login != null){
+                if($alreadyExist->isLoginValid($login)){
+                    throw new \Exception("Login déja existant");
+                }
+            }
+            elseif($email != null){
+                if($alreadyExist->isEmailValid($email)){
+                    throw new \Exception("Email déja existant");
+                }
+            }
+
         } catch (\Exception $e) {
             return $e->getMessage(); // si une Exception est raise , on return le message !
         }
