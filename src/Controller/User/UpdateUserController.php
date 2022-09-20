@@ -52,7 +52,7 @@ class UpdateUserController implements \Quizz\Core\Controller\ControllerInterface
     {
         if($this->error){
             return TwigCore::getEnvironment()->render(
-                'user/updateUser.html.twig',[
+                'user/user.html.twig',[
                     'error' => true,
                     'causeError' =>$this->error,
                     'etudiant' => $this->etudiant
@@ -63,7 +63,7 @@ class UpdateUserController implements \Quizz\Core\Controller\ControllerInterface
             $unEtudiant = new EtudiantModel();
             $this->etudiant = $unEtudiant->getFetchIdEtudiant($this->id);
             return TwigCore::getEnvironment()->render(
-                'user/updateUser.html.twig',[
+                'user/user.html.twig',[
                     'success' => true,
                     'etudiant' => $this->etudiant
                 ]
@@ -71,7 +71,7 @@ class UpdateUserController implements \Quizz\Core\Controller\ControllerInterface
         }
         else{
             return TwigCore::getEnvironment()->render(
-                'user/updateUser.html.twig',[
+                'user/user.html.twig',[
                     'etudiant' => $this->etudiant,
                 ]
             );

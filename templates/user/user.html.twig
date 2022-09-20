@@ -16,13 +16,53 @@
                         text-align: center;
                 }
                 form{
-                        margin-bottom: 20px;
+                        margin-bottom: 70px;
                 }
                 .container{
                         width:80%;
                 }
         </style>
+        {% if etudiant %}
+                <h1> Etudiant : {{ etudiant.getLogin }}</h1>
+                <div class="container">
+                <form method="post" action="/etudiants/{{ etudiant.getIdEtudiant }}" class="needs-validation" novalidate>
+                <div class="row mb-4">
+                        <div class="col">
+                                <div class="form-outline">
+                                        <input type="text" id="form3Example1" class="form-control" name="firstname" value="{{ etudiant.getPrenom }}" />
+                                        <label class="form-label" for="form3Example1">First Name</label>
+                                </div>
+                                <div class="form-outline">
+                                        <input type="text" id="form3Example1" class="form-control" name="login" value="{{ etudiant.getLogin }}" required/>
+                                        <label class="form-label" for="form3Example1">Login</label>
+                                </div>
+                        </div>
+                        <div class="col">
+                                <div class="form-outline">
+                                        <input type="text" id="form3Example2" class="form-control" name="lastname" value="{{ etudiant.getNom }}" required/>
+                                        <label class="form-label" for="form3Example2">Last name</label>
+                                </div>
+
+                        </div>
+                </div>
+
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                        <input type="email" id="form3Example3" class="form-control" name="email" value="{{ etudiant.getEmail }}" required/>
+                        <label class="form-label" for="form3Example3">Email address</label>
+                </div>
+
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                        <input type="password" id="form3Example4" class="form-control" name="password" value="{{ etudiant.getMotDePasse }}"/>
+                        <label class="form-label" for="form3Example4">Password</label>
+                </div>
+                <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-block mb-4">Modifier</button>
+                </div>
+        {% elseif etudian == null %}
         <h1>Ajouter un étudiant</h1>
+
         {#    <form class="ajoutUser" method="post" action="/addUser">#}
         <div class="container">
         <form action="/etudiants/add" method="post" class="needs-validation" novalidate>
@@ -60,12 +100,14 @@
                                onfocus="this.removeAttribute('readonly');" required/>
                         <label class="form-label" for="form3Example4">Password</label>
                 </div>
-
-
-                <!-- Submit button -->
                 <div class="text-center">
                         <button type="submit" class="btn btn-primary btn-block mb-4">Ajouter</button>
                 </div>
+
+        {% endif %}
+                <!-- Submit button -->
+
+
                 <script>
                         // Example starter JavaScript for disabling form submissions if there are invalid fields
                         (function() {
@@ -94,7 +136,13 @@
                         <h2> {{causeError}}</h2>
                 {% endif %}
                 {% if success == true %}
+                        {% if etudiant %}
+                        <h2>Etudiant modifié !</h2>
+
+                        {% else %}
                         <h2>Etudiant ajouté !</h2>
+                        {% endif %}
+
                 {% endif %}
         </div>
 
